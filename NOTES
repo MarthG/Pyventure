@@ -1,0 +1,46 @@
+F# Function
+V# Value
+I# Iter
+O# Other
+N! Note
+
+__main__.py
+  O# Handle welcome, etc, version
+  F# Begin game
+  F# Invoke other classes
+  F# Scores???
+
+  F# Game Over/rollback to beginning of room???
+  N! Saving player state can be difficult. Is it possible? Investigate, possibly keep copy in memory/disk when entering room
+
+Logic.py
+  F# Game Logic
+  F# Math calculations of DMG, armor, etc etc
+  F# ticking
+  F# etc
+  F# map/pos handling
+
+IO.py
+  F# Intercepting user input
+  F# Translating input to function calls and ticking
+  F# Displaying text and on-text elements
+  F# PCSpkr? lol
+
+Player.py
+  V# Inventory
+  V# Stats, etc
+  V# Current wear/holding
+  F# Invoke Logic.attack, for example
+  V# Current position
+  F# Handling death
+  F# Handle posion, bleeding, effects
+
+Enemy.py ((DRAFT))
+  V# Enemy's name
+  V# Dmg
+  V# HP
+  V# Misc values, wears, etc
+
+Room.py
+  O# Accessing (map) files
+  F#
