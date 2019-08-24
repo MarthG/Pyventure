@@ -22,6 +22,8 @@ def help(cmds=None, command_descriptions=None):
 
 def version():
     global verbosity
+    global version
+
     if verbosity > 0:
         print("[II] We are verbose")
     print(
@@ -41,7 +43,7 @@ def run():
         print("[II] We are verbose")
     print("[II] Stub run()")
 
-    pass
+    return 0
 
 
 def main(argv=None):

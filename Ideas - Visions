@@ -4,7 +4,28 @@ I# Iter
 O# Other
 N! Note
 
-__main__.py
+Map.dat
+  header CA DB
+  V# Contains room layout in a matrix
+  V# Contains room's text (intro, description, etc)
+  V# Entity/Item list (per-room, should be a simple dict/list)
+  V# Is room locked? Requires key? requires something? obstructed?
+  F# look()
+  F# enter()
+  F# leave()
+
+Game.dat
+  header CA DA
+
+Item.py
+  V# Item ID
+  V# Type
+  V# Slot
+  V# Name
+  V# Description
+  V# Value (quantity, damage, armor, resistence, etc)
+
+__main__.py -> pyventure.py
   O# Handle welcome, etc, version
   F# Begin game
   F# Invoke other classes
