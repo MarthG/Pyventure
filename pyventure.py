@@ -1,4 +1,4 @@
-from sys import argv
+import argparse
 
 verbosity = 0
 version = "0.01"
@@ -12,28 +12,19 @@ def help(cmds=None, command_descriptions=None):
     if verbosity > 0:
         print("[II] We are verbose")
 
-    print("[II] Stub help()")
-
-    for command in cmds:
-        #print(command)
-        print("[II] {0}: {1}".format(command, command_descriptions[str(command)]))
-    pass
-
-
-def version():
+def printVersion():
     global verbosity
     global version
 
     if verbosity > 0:
         print("[II] We are verbose")
+    
     print(
-'''
-[II]
-[II] Version v{0}
-[II]
-'''.format(version)
-)
-    pass
+        "[II]\n" +
+        "[II] Version v{0}\n".format(version) +
+        "[II]"
+    )
+    # print("[II] Version v{0}".format(version))
 
 
 def run():
@@ -42,9 +33,6 @@ def run():
     if verbosity > 0:
         print("[II] We are verbose")
     print("[II] Stub run()")
-
-    return 0
-
 
 def main(argv=None):
     arg = argv[1:]
@@ -98,8 +86,6 @@ def checkStatus(currentStatus=None, helpFunction=None, versionFunction=None, nor
     # Normal:       +
     #
     # Usage: checkStatus( State variable, help f(), version f(), run f())
-    a = currentStatus
-
     global verbosity
 
     if (helpFunction is None):
@@ -111,17 +97,16 @@ def checkStatus(currentStatus=None, helpFunction=None, versionFunction=None, nor
 
 
 
-    if (a != 0) and (not a is None):
-        if (a & 2):
-            if (a & 4):
+
+    if currentStatus != 0 and not currentStatus is None:
+        if currentStatus & 2:
+            if currentStatus & 4:
                 helpFunction(cmds, descriptions)
-                return 0
-            elif (a & 8):
-                versionFunction()
-                return 0
+            elif currentStatus & 8:
+                printVersion()
             else:
                 raise Exception("[EE] Exception: Invalid state. Exiting")
-        elif (a & 1):
+        elif currentStatus & 1:
             normalRuntime()
 
     return 0
