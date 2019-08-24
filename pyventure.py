@@ -3,13 +3,19 @@ from sys import argv
 verbosity = 0
 version = "0.01"
 
-def help():
+def help(cmds=None):
     global verbosity
+
+    if (cmds is None):
+        raise Exception("[EE] Exception: Can't display help message, something went wrong.")
 
     if verbosity > 0:
         print("[II] We are verbose")
-        print("[II] Stub help()")
 
+    print("[II] Stub help()")
+    
+    for cmd in cmds:
+        print("")
     pass
 
 def version():
@@ -36,6 +42,8 @@ def run():
 
 def main(argv=None):
     arg = argv[1:]
+    cmds = [help_arg, vers_arg, verbose]
+    descriptions = {help_arg: "", vers_arg: "", verbose: ""}
     help_arg = ["-h", "-?", "--help"]
     vers_arg = ["-v", "-ver", "--version"]
     verbose = ["-V", "--debug", "--verbose"]
@@ -65,7 +73,7 @@ def main(argv=None):
         status |= 1
 
     print(verbosity)
-    checkStatus(status, help, version, run)
+    checkStatus(status, help(cmds), version, run)
 
     return 0
 
