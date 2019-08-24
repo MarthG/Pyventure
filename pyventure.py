@@ -1,4 +1,4 @@
-from sys import argv
+import argparse
 
 verbosity = 0
 version = "0.01"
