@@ -12,17 +12,17 @@ def help():
 
     pass
 
-def version():
+def printVersion():
     global verbosity
     if verbosity > 0:
         print("[II] We are verbose")
     print(
-'''
-[II]
-[II] Version v{0}
-[II]
-'''.format(version)
-)
+        '''
+        [II]
+        [II] Version v{0}
+        [II]
+        '''.format(version)
+    )
     pass
 
 def run():
