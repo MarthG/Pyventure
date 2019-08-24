@@ -1,20 +1,16 @@
-from sys import argv
+import argparse
 
-verbosity = 0
+verbosity = False
 version = "0.01"
 
-def help():
+def verbose(message):
+    # message: String
     global verbosity
-
-    if verbosity > 0:
-        print("[II] We are verbose")
-        print("[II] Stub help()")
-
+    if verbosity:
+        print(message)
 
 def printVersion():
-    global verbosity
-    if verbosity > 0:
-        print("[II] We are verbose")
+    verbose("[II] We are verbose")
     
     print(
         "[II]\n" +
@@ -24,19 +20,11 @@ def printVersion():
     # print("[II] Version v{0}".format(version))
 
 def run():
-    global verbosity
-
-    if verbosity > 0:
-        print("[II] We are verbose")
+    verbose("[II] We are verbose")
     print("[II] Stub run()")
 
 
 def main(argv=None):
-    arg = argv[1:]
-    help_arg = ["-h", "-?", "--help"]
-    vers_arg = ["-v", "-ver", "--version"]
-    verbose = ["-V", "--debug", "--verbose"]
-
     global verbosity
 
     # Status bits
@@ -44,24 +32,18 @@ def main(argv=None):
     status = 0
 
     # print(arg)
+    if argv.verbose == True:
+        verbosity = True
+        status |= 16
+    
+    elif argv.version:
+        status |= 8
 
-    if len (arg) >= 1:
-        status |= 2
-        for i in arg:
-            if i in help_arg:
-                status |= 4
-            elif i in vers_arg:
-                status |= 8
-            elif i in verbose:
-                status |= 16
-                verbosity = 1
-            else:
-                print("[EE] Bad arguments. Try {0} for help".format(help_arg[1]))
-                return -1
     else:
         status |= 1
 
-    print(verbosity)
+    print("Verbose Level: " + str(verbosity))
+    verbose("[II] Current Status: {0}".format(status))
     checkStatus(status, help, version, run)
 
     return 0
@@ -76,16 +58,12 @@ def checkStatus(currentStatus=None, helpFunction=None, versionFunction=None, nor
     # Normal:       +
     #
     # Usage: checkStatus( State variable, help f(), version f(), run f())
-    global verbosity
-
     if (helpFunction is None) or (versionFunction is None) or (normalRuntime is None):
         raise Exception("[EE] Exception: Bad function pass")
 
     if currentStatus != 0 and not currentStatus is None:
         if currentStatus & 2:
-            if currentStatus & 4:
-                helpFunction()
-            elif currentStatus & 8:
+            if currentStatus & 8:
                 printVersion()
             else:
                 raise Exception("[EE] Exception: Invalid state. Exiting")
@@ -95,4 +73,9 @@ def checkStatus(currentStatus=None, helpFunction=None, versionFunction=None, nor
     return 0
 
 if __name__ == '__main__':
-    main(argv)
+    # Setup arguments
+    parser = argparse.ArgumentParser(description='Pyventure by MarthG')
+    parser.add_argument("-V", "--verbose", "--debug", action='store_true', help='Show verbose messages')
+    parser.add_argument("-v", "--version", action='store_true', help='Show version number')
+    argsv = parser.parse_args()
+    main(argsv)
