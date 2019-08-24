@@ -1,0 +1,30 @@
+# 186d55b2f42aaf167a7f3d75a0837d3bb3bd670b
+
+The 'version' variable was named the same as the function that displays it.
+'printVersion' makes more sense as a function name as it doesn't return the function,
+but simply shows it to the user.
+
+# c3e4a95e64f313fc6e6784060e0e01999b80594e
+
+The 'a' variable isn't descriptive (you won't know what it's for in 3 days) - and it's seemingly identical to
+'currentState', which makes more sense than 'a'
+
+I also forgot to commit the removal of brackets, I do the same thing a lot, Python does ignore them, but
+none of the other statements have it.
+
+# aa480706017b8e494db353788df4c339e6394085
+
+While testing I noticed my re-formatting commit had broken the '-v' output (https://awo.oooooooooooooo.ooo/i/4vsk.png)
+to mitigate this i've created a new function that uses 3 single line strings.
+
+However, I'm not sure why there's two blank lines surrounding the version, so i've also included a version that removes them,
+but left it commented out.
+
+# 90447dcc6d6ae091d56b3643a7bd04867d6e0bd2
+
+In this commit I removed 'pass' from your functions, it is used as a placeholder for a function that has no code, yours do 
+and as nothing calling them is expecting a return of data, there's no need for the placeholder.
+
+Pass will also skip and code after it, and as there is none, it doesn't need to be there.
+
+I've also included a 'argparse' branch, I understand you wanted to use bitwise for your arguments, but yaknow, why reinvent the wheel :D
