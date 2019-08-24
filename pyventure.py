@@ -16,13 +16,13 @@ def printVersion():
     global verbosity
     if verbosity > 0:
         print("[II] We are verbose")
+    
     print(
-        '''
-        [II]
-        [II] Version v{0}
-        [II]
-        '''.format(version)
+        "[II]\n" +
+        "[II] Version v{0}\n".format(version) +
+        "[II]"
     )
+    # print("[II] Version v{0}".format(version))
     pass
 
 def run():
