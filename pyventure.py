@@ -89,7 +89,7 @@ def checkStatus(currentStatus=None, helpFunction=None, versionFunction=None, nor
             if currentStatus & 4:
                 helpFunction()
             elif currentStatus & 8:
-                versionFunction()
+                printVersion()
             else:
                 raise Exception("[EE] Exception: Invalid state. Exiting")
         elif currentStatus & 1:
