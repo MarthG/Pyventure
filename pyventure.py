@@ -12,27 +12,13 @@ def verbose(message):
     
 
 def help(cmds=None, command_descriptions=None):
-    global verbosity
-
     if (cmds is None) or (command_descriptions is None):
         raise Exception("[EE] Exception: Can't display help message, something went wrong.")
 
-    if verbosity > 0:
-        print("[II] We are verbose")
-
-    print("[II] Stub help()")
-
-    for command in cmds:
-        #print(command)
-        print("[II] {0}: {1}".format(command, command_descriptions[str(command)]))
-    
-    
-
+    verbose("[II] We are verbose")
 
 def printVersion():
-    global verbosity
-    if verbosity > 0:
-        print("[II] We are verbose")
+    verbose("[II] We are verbose")
     
     print(
         "[II]\n" +
@@ -58,7 +44,6 @@ def main(argv=None):
 
     cmds = [help_arg, vers_arg, verbose]
     
-    global verbosity
 
     # Status bits
     # normal_execution,1 arg_called,2 help_arg,4 vers_arg,8 verbose,16
@@ -75,7 +60,6 @@ def main(argv=None):
     else:
         status |= 1
 
-    print("Verbose Level: " + str(verbosity))
     verbose("[II] Current Status: {0}".format(status))
     checkStatus(status, help, version, run, cmds, descriptions)
 
@@ -92,8 +76,6 @@ def checkStatus(currentStatus=None, helpFunction=None, versionFunction=None, nor
     # Normal:       +
     #
     # Usage: checkStatus( State variable, help f(), version f(), run f())
-    a = currentStatus
-
     global verbosity
 
     if (helpFunction is None):
@@ -105,14 +87,13 @@ def checkStatus(currentStatus=None, helpFunction=None, versionFunction=None, nor
 
 
 
-    if (a != 0) and (not a is None):
-        if (a & 2):
-            if (a & 4):
+
+    if currentStatus != 0 and not currentStatus is None:
+        if currentStatus & 2:
+            if currentStatus & 4:
                 helpFunction(cmds, descriptions)
-                return 0
-            elif (a & 8):
-                versionFunction()
-                return 0
+            elif currentStatus & 8:
+                printVersion()
             else:
                 raise Exception("[EE] Exception: Invalid state. Exiting")
         elif currentStatus & 1:
