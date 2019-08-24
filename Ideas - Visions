@@ -10,12 +10,14 @@ Map.dat
   V# Contains room's text (intro, description, etc)
   V# Entity/Item list (per-room, should be a simple dict/list)
   V# Is room locked? Requires key? requires something? obstructed?
-  F# look()
-  F# enter()
-  F# leave()
 
 Game.dat
   header CA DA
+
+Player.py
+  F# look()
+  F# enter()
+  F# leave()
 
 Item.py
   V# Item ID
