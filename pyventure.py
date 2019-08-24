@@ -10,7 +10,6 @@ def help():
         print("[II] We are verbose")
         print("[II] Stub help()")
 
-    pass
 
 def printVersion():
     global verbosity
@@ -23,7 +22,6 @@ def printVersion():
         "[II]"
     )
     # print("[II] Version v{0}".format(version))
-    pass
 
 def run():
     global verbosity
@@ -32,7 +30,6 @@ def run():
         print("[II] We are verbose")
     print("[II] Stub run()")
 
-    pass
 
 def main(argv=None):
     arg = argv[1:]
