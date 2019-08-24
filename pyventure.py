@@ -79,22 +79,20 @@ def checkStatus(currentStatus=None, helpFunction=None, versionFunction=None, nor
     # Normal:       +
     #
     # Usage: checkStatus( State variable, help f(), version f(), run f())
-    a = currentStatus
-
     global verbosity
 
     if (helpFunction is None) or (versionFunction is None) or (normalRuntime is None):
         raise Exception("[EE] Exception: Bad function pass")
 
-    if (a != 0) and (not a is None):
-        if (a & 2):
-            if (a & 4):
+    if currentStatus != 0 and not currentStatus is None:
+        if currentStatus & 2:
+            if currentStatus & 4:
                 helpFunction()
-            elif (a & 8):
+            elif currentStatus & 8:
                 versionFunction()
             else:
                 raise Exception("[EE] Exception: Invalid state. Exiting")
-        elif (a & 1):
+        elif currentStatus & 1:
             normalRuntime()
 
     return 0
