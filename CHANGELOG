@@ -1,0 +1,11 @@
+# Forgot to commit it in sections, whoops.
+
+## Collapse codebase
+
+Using 'verbose' function instead of constantly running that if statement,
+also removes the 'global verbosity' definition on every line
+
+## Argparse
+
+This may not be properly implemented with the bitwise argument handling, but the help command is 
+generated automatically (woo)
