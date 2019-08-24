@@ -1,23 +1,24 @@
 import argparse
 
-verbosity = 0
+verbosity = False
 version = "0.01"
 
-def help(cmds=None, command_descriptions=None):
-    global verbosity
 
+def verbose(message):
+    # message: String
+    global verbosity
+    if verbosity:
+        print(message)
+    
+
+def help(cmds=None, command_descriptions=None):
     if (cmds is None) or (command_descriptions is None):
         raise Exception("[EE] Exception: Can't display help message, something went wrong.")
 
-    if verbosity > 0:
-        print("[II] We are verbose")
+    verbose("[II] We are verbose")
 
 def printVersion():
-    global verbosity
-    global version
-
-    if verbosity > 0:
-        print("[II] We are verbose")
+    verbose("[II] We are verbose")
     
     print(
         "[II]\n" +
@@ -28,10 +29,7 @@ def printVersion():
 
 
 def run():
-    global verbosity
-
-    if verbosity > 0:
-        print("[II] We are verbose")
+    verbose("[II] We are verbose")
     print("[II] Stub run()")
 
 def main(argv=None):
@@ -45,32 +43,24 @@ def main(argv=None):
     descriptions = {str(help_arg): "help", str(vers_arg): "version", str(verbose): "debug"}
 
     cmds = [help_arg, vers_arg, verbose]
-
-    global verbosity
+    
 
     # Status bits
     # normal_execution,1 arg_called,2 help_arg,4 vers_arg,8 verbose,16
     status = 0
 
     # print(arg)
+    if argv.verbose == True:
+        verbosity = True
+        status |= 16
+    
+    elif argv.version:
+        status |= 8
 
-    if len (arg) >= 1:
-        status |= 2
-        for i in arg:
-            if i in help_arg:
-                status |= 4
-            elif i in vers_arg:
-                status |= 8
-            elif i in verbose:
-                status |= 16
-                verbosity = 1
-            else:
-                print("[EE] Bad arguments. Try {0} for help".format(help_arg[1]))
-                return -1
     else:
         status |= 1
 
-    # print(verbosity)
+    verbose("[II] Current Status: {0}".format(status))
     checkStatus(status, help, version, run, cmds, descriptions)
 
     return 0
@@ -113,4 +103,9 @@ def checkStatus(currentStatus=None, helpFunction=None, versionFunction=None, nor
 
 
 if __name__ == '__main__':
-    main(argv)
+    # Setup arguments
+    parser = argparse.ArgumentParser(description='Pyventure by MarthG')
+    parser.add_argument("-V", "--verbose", "--debug", action='store_true', help='Show verbose messages')
+    parser.add_argument("-v", "--version", action='store_true', help='Show version number')
+    argsv = parser.parse_args()
+    main(argsv)
