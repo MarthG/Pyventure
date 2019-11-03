@@ -6,9 +6,10 @@ N! Note
 
 Map.dat
   header CA DB
-  V# Contains room layout in a matrix
+  V# Map/layer size in tiles (width, height) and ID
+  V# Room layout in a matrix
   V# Contains room's text (intro, description, etc)
-  V# Entity/Item list (per-room, should be a simple dict/list)
+  V# Entity/Item list (per-room, should be a simpler)
   V# Is room locked? Requires key? requires something? obstructed?
 
 Game.dat
